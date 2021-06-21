@@ -1,8 +1,11 @@
 const Agenda = require('agenda');
-const db = require('./db');
+const Mongoose = require('mongoose');
+// const db = require('./db');
 
 async function run() {
-  const agenda = new Agenda().mongo(db.getConnection(), 'jobs');
+  const agenda = new Agenda()
+    .mongo(Mongoose.connection, 'jobs')
+    .processEvery('one minute');
 
   // `job` is an object representing the job that `producer.js` scheduled.
   // `job.attrs` contains the raw document that's stored in MongoDB, so
