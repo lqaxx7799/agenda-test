@@ -20,6 +20,7 @@ const flowExecutedSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  waitedStates: Array,
 }, {
   timestamps: true,
 });
@@ -59,7 +60,7 @@ async function update(filter, updates) {
 module.exports = {
   upsert,
   getStatusFlowByExecuted,
-
+  get: FlowExecuted.findById.bind(FlowExecuted),
   add,
   update,
   remove,
